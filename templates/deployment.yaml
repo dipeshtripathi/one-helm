@@ -1,0 +1,42 @@
+{{- range .Values.deployments }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+spec:
+  replicas: {{ .replicas }}
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+      - name: {{ .name }}
+        image: {{ .image }}
+        resources:
+        {{- toYaml .resources | nindent 10 }}
+        {{- if .livenessProbe }}
+        livenessProbe:
+        {{- toYaml .livenessProbe | nindent 10 }}
+        {{- end }}
+        {{- if .startupProbe }}
+        startupProbe:
+        {{- toYaml .startupProbe | nindent 10 }}
+        {{- end }}
+        {{- if .readinessProbe }}
+        readinessProbe:
+        {{- toYaml .readinessProbe | nindent 10 }}
+        {{- end }}
+        volumeMounts:
+{{ toYaml .volumeMounts | indent 10 }}
+        env:
+{{ toYaml .env | indent 10 }}
+{{- if .volumes }}
+    volumes:
+{{ toYaml .volumes | indent 6 }}
+{{- end }}
+{{- end }}

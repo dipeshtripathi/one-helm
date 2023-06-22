@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  one-helm:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-22T11:04:41.730085+05:30"
+    description: A Helm chart for Kubernetes
+    digest: fc0a64047d083bf748d95bbaf6d564193e4c9b4f3dbd5a1638c7a2991a2a4a50
+    name: one-helm
+    type: application
+    urls:
+    - https://dipeshtripathi.github.io/helm-chart/one-helm-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-22T11:04:41.728629+05:30"
